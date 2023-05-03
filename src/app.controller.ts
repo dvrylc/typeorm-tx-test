@@ -1,13 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { BarService } from './modules/bar';
 import { FooService } from './modules/foo';
 import { UnitOfWorkService } from './modules/unit-of-work';
 
 @Controller()
 export class AppController {
   constructor(
-    private readonly appService: AppService,
     private readonly fooService: FooService,
+    private readonly barService: BarService,
     private readonly uowService: UnitOfWorkService,
   ) {}
 
@@ -17,12 +17,12 @@ export class AppController {
     await this.uowService.startQueryRunnerTx();
 
     const beforeCount = await this.fooService.getCount();
-    const beforeUsers = await this.appService.getUsers();
+    const beforeUsers = await this.barService.getUsers();
 
     await this.fooService.addUser();
 
     const afterCount = await this.fooService.getCount();
-    const afterUsers = await this.appService.getUsers();
+    const afterUsers = await this.barService.getUsers();
 
     // commit tx
     await this.uowService.commitQueryRunnerTx();

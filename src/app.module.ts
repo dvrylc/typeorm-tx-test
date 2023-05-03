@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import 'reflect-metadata';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { FooModule } from './modules/foo/foo.module';
 import { UnitOfWorkModule } from './modules/unit-of-work/unit.module';
+import { BarModule } from './modules/bar';
 
 @Module({
   imports: [
@@ -18,8 +18,8 @@ import { UnitOfWorkModule } from './modules/unit-of-work/unit.module';
     }),
     UnitOfWorkModule,
     FooModule,
+    BarModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

@@ -10,12 +10,14 @@ export class FooService {
 
   async getCount(): Promise<number> {
     const queryRunner = this.uowService.getQueryRunner();
+    // console.log(await queryRunner.manager.query('select txid_current()'));
     const count = await queryRunner.manager.count(User);
     return count;
   }
 
   async addUser(): Promise<User> {
     const queryRunner = this.uowService.getQueryRunner();
+    // console.log(await queryRunner.manager.query('select txid_current()'));
     const user = await queryRunner.manager.save(User, {
       firstName: Math.random().toString(),
       lastName: Math.random().toString(),

@@ -10,6 +10,7 @@ export class BarService {
 
   async getUsers(): Promise<User[]> {
     const queryRunner = this.uowService.getQueryRunner();
+    // console.log(await queryRunner.manager.query('select txid_current()'));
     const users = await queryRunner.manager.find(User);
     return users;
   }
